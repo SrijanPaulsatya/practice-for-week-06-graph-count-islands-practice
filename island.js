@@ -11,6 +11,49 @@ function getNeighbors(row, col, matrix) {
   // Return neighbors
   
   // Your code here
+  let neighbors = [];
+
+  //Top
+  if (row !== 0 && matrix[row - 1][col] === 1) {
+    neighbors.push([row - 1,col]);
+  }
+
+  //Top Left
+  if ((row !== 0 && col !== 0) && matrix[row - 1][col - 1] === 1) {
+    neighbors.push([row - 1, col - 1]);
+  }
+
+  //Top Right
+  if ((row !== 0 && col !==matrix[0].length - 1) && matrix[row - 1][col + 1] === 1) {
+    neighbors.push([row - 1, col + 1]);
+  }
+
+  //Down
+  if (row !== (matrix.length - 1) && matrix[row + 1][col] === 1) {
+    neighbors.push([row + 1,col]);
+  }
+
+  //Down Right
+  if ((row !== matrix.length - 1 && col !== matrix[0].length - 1) && matrix[row + 1][col + 1] === 1) {
+    neighbors.push([row + 1, col + 1]);
+  }
+
+  //Down Left
+  if ((row !== matrix.length - 1 && col !== 0) && matrix[row + 1][col - 1] === 1) {
+    neighbors.push([row + 1, col - 1]);
+  }
+
+  //Left
+  if (col !== 0 && matrix[row][col - 1] === 1) {
+    neighbors.push([row, col - 1]);
+  }
+
+  //Right
+  if (col !== matrix[0].length - 1 && matrix[row][col + 1] === 1) {
+    neighbors.push([row, col + 1]);
+  }
+  
+  return neighbors;
 }
 
 function countIslands(matrix) {
