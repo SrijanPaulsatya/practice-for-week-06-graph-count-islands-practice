@@ -76,6 +76,34 @@ function countIslands(matrix) {
   // Return island count
   
   // Your code here
+  let visitedNodes = new Set();
+  let islandCount = 0;
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[0].length; col++) {
+      let nodeIndexString = `${row},${col}`
+      if (matrix[row][col] === 1 && !visitedNodes.has(nodeIndexString)) {
+        islandCount += 1;
+        visitedNodes.add(nodeIndexString);
+        let stack = [[row, col]];
+
+        while (stack.length > 0) {
+          let currentNode = stack.pop();
+          let [currentRow, currentCol] = currentNode;
+          let neighbors = getNeighbors(currentRow, currentCol, matrix);
+
+          for (let neighbor of neighbors) {
+            if (!visitedNodes.has(neighbor.join(','))) {
+              visitedNodes.add(neighbor.join(','));
+              stack.push(neighbor);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return islandCount
 }
 
 // Uncomment the lines below for local testing
